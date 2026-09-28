@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------ */
+/* Brand Design Tokens */
+/* ------------------ */
+
+@layer base {
+  :root {
+    /* ------------------ */
+    /* Fonts */
+    /* ------------------ */
+    --body-font: var(--font-inter), system-ui, -apple-system, sans-serif;
+    --heading-font: var(--font-playfair), Georgia, serif;
+
+    /* ------------------ */
+    /* Brand Colors — extracted from Avirat Law College logo */
+    /* ------------------ */
+    --theme-color: #1B2A5A;
+    /* Navy — scales / book */
+    --theme-color2: #F0A020;
+    /* Warm orange — logo bg */
+    --theme-color3: #D62828;
+    /* Vivid red — ribbon */
+    --theme-color-light: rgba(240, 160, 32, 0.10);
+    --theme-bg-light: #FFF8EC;
+    /* Cream from sun rays */
+
+    --body-text-color: #4B5563;
+    --color-white: #ffffff;
+    --color-dark: #0F1E45;
+
+    --hero-overlay-color: #0F1E45;
+    --slider-arrow-bg: rgba(255, 255, 255, 0.25);
+
+    /* ------------------ */
+    /* Borders & Effects */
+    /* ------------------ */
+    --box-shadow: 0 0 40px 5px rgb(27 42 90 / 8%);
+    --box-shadow2: 0 0 15px rgba(27, 42, 90, 0.15);
+
+    --border-info-color: rgba(27, 42, 90, 0.08);
+    --border-info-color2: rgba(27, 42, 90, 0.05);
+    --border-white-color: rgba(255, 255, 255, 0.08);
+    --border-white-color2: rgba(255, 255, 255, 0.05);
+
+    /* ------------------ */
+    /* Footer */
+    /* ------------------ */
+    --footer-bg: #1B2A5A;
+    /* Navy */
+    --footer-bg2: #0F1E45;
+    /* Deeper navy */
+    --footer-text-color: #F5FAFF;
+
+    /* ------------------ */
+    /* Transitions */
+    /* ------------------ */
+    --transition: all .5s ease-in-out;
+    --transition2: all .3s ease-in-out;
+
+    /* ------------------ */
+    /* Tailwind Mapping Layer */
+    /* ------------------ */
+
+    --background: 0 0% 100%;
+    --foreground: 226 40% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 226 40% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 226 40% 15%;
+
+    /* Primary = navy #1B2A5A */
+    --primary: 226 54% 23%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary = warm orange #F0A020 — dark foreground for contrast */
+    --secondary: 37 87% 53%;
+    --secondary-foreground: 226 54% 15%;
+
+    /* Accent = vivid red #D62828 */
+    --accent: 0 69% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 30 30% 96%;
+    --muted-foreground: 226 15% 40%;
+
+    --destructive: 0 69% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 20% 90%;
+    --input: 30 20% 90%;
+    --ring: 226 54% 23%;
+
+    --radius: 0.5rem;
+  }
+
+  /* ------------------ */
+  /* Dark Mode */
+  /* ------------------ */
+
+  .dark {
+    --background: 226 40% 8%;
+    --foreground: 30 30% 96%;
+
+    --card: 226 40% 11%;
+    --card-foreground: 30 30% 96%;
+
+    --popover: 226 40% 11%;
+    --popover-foreground: 30 30% 96%;
+
+    --primary: 226 60% 55%;
+    --primary-foreground: 226 40% 8%;
+
+    --secondary: 37 87% 53%;
+    --secondary-foreground: 226 54% 15%;
+
+    --accent: 0 69% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 226 20% 18%;
+    --muted-foreground: 30 15% 65%;
+
+    --border: 226 20% 22%;
+    --input: 226 20% 22%;
+    --ring: 226 60% 55%;
+  }
+
+  /* ------------------ */
+  /* Base Styles */
+  /* ------------------ */
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--body-font);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--heading-font);
+    letter-spacing: -0.015em;
+  }
+
+  /* Auto-highlight inline emphasis inside body copy */
+  strong,
+  b {
+    color: hsl(var(--primary));
+    font-weight: 700;
+  }
+}
+
+.hero-gradient {
+  background: linear-gradient(
+    180deg,
+    hsl(var(--secondary)) 0%,
+    hsl(30 95% 65%) 45%,
+    #ffffff 100%
+  );
+}
+
+.hero-gradient-warm {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--secondary)) 0%,
+    #FB923C 50%,
+    #FDBA74 100%
+  );
+}
+
+.hero-gradient-deep {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--secondary)) 0%,
+    #F97316 50%,
+    hsl(var(--primary)) 100%
+  );
+}
+/* ------------------ */
+/* Utilities */
+/* ------------------ */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .transition-default {
+    transition: var(--transition);
+  }
+
+  .transition-fast {
+    transition: var(--transition2);
+  }
+
+  .shadow-brand {
+    box-shadow: var(--box-shadow);
+  }
+
+  .shadow-brand-strong {
+    box-shadow: var(--box-shadow2);
+  }
+
+  .bg-theme-light {
+    background: var(--theme-bg-light);
+  }
+
+  .text-theme {
+    color: var(--theme-color);
+  }
+
+  .text-theme-accent {
+    color: var(--theme-color2);
+  }
+
+  .bg-footer {
+    background: var(--footer-bg);
+  }
+
+  .bg-footer-alt {
+    background: var(--footer-bg2);
+  }
+
+  /* Highlight helpers — for important inline text */
+  .highlight-primary {
+    color: hsl(var(--primary));
+    font-weight: 700;
+  }
+
+  .highlight-accent {
+    color: hsl(var(--accent));
+    font-weight: 700;
+  }
+
+  .bg-highlight {
+    background: hsl(var(--secondary) / 0.18);
+    color: hsl(var(--primary));
+    padding: 0.1em 0.45em;
+    border-radius: 0.25rem;
+    font-weight: 700;
+  }
+}
