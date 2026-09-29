@@ -1,6 +1,5 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { Hero } from './hero'
 import { Testimonials } from './testimonials'
 import { ApplyNow } from './ApplyNow'
@@ -9,7 +8,6 @@ import { HomeGallery } from './HomeGallery'
 import { MapSection } from './mapSection'
 import { Stats } from './stats'
 import { CourseStructure } from './subjects'
-import { CourseType } from '@/types/course'
 import { WhyChooseUs } from './WhyChoseUs'
 
 export default function HomeClient({
@@ -19,31 +17,24 @@ export default function HomeClient({
   homeData: any
   galleryImages: any[]
 }) {
-  const [selectedCourse, setSelectedCourse] = useState<CourseType | null>(null)
-
-  useEffect(() => {
-    const savedCourse = localStorage.getItem('selectedCourse') as CourseType | null
-    if (savedCourse) {
-      setSelectedCourse(savedCourse)
-    }
-  }, [])
-
   return (
     <main>
       <Hero data={homeData?.slides} />
 
-      {selectedCourse && (
-        <>
-          <Stats data={homeData?.stats} />
-          <HomeGallery images={galleryImages} />
-          <CourseStructure courseType={selectedCourse} data={homeData?.courses} />
-          <Testimonials data={homeData?.testimonials} />
-        </>
-      )}
+      <Stats data={homeData?.stats} />
+
+      <HomeGallery images={galleryImages} />
+
+      <CourseStructure data={homeData?.courses} />
+
+      <Testimonials data={homeData?.testimonials} />
 
       <WhyChooseUs data={homeData?.whyChooseUs} />
+
       <MapSection />
+
       <ApplyNow />
+
       <MessageSection
         sanskritQuote={homeData?.sanskritQuote}
         quoteTranslation={homeData?.quoteTranslation}

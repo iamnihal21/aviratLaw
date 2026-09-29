@@ -1,17 +1,19 @@
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import AdmissionsClient from './AdmissionsClient'
 
 export const revalidate = 60
 
 export default async function AdmissionsPage() {
-  const payload = await getPayloadHMR({ config: configPromise })
-  
+  const payload = await getPayload({ config: configPromise })
+
   // Fetch both Admission and Contact (for FAQs) globals
   const [admissionsData, contactData] = await Promise.all([
     payload.findGlobal({ slug: 'admissions' }),
-    payload.findGlobal({ slug: 'contact' })
+    payload.findGlobal({ slug: 'contact' }),
   ])
 
   return <AdmissionsClient data={admissionsData} faqData={contactData?.faqs || []} />
 }
+
+export const dynamic = 'force-dynamic'

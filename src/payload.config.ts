@@ -41,8 +41,7 @@ export default buildConfig({
   },
 
   // ✅ FIXED: NEVER keep this empty
-  serverURL:
-    process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
 
   cookiePrefix: 'avirat-law',
 
@@ -61,17 +60,10 @@ export default buildConfig({
     Results,
     Inquiries,
     Activities,
-    Visits,                                                            
+    Visits,
   ],
 
-  globals: [
-    About,
-    Contact,
-    Admissions,
-    Campus,
-    HomeSettings,
-    MootCourt
-  ],
+  globals: [About, Contact, Admissions, Campus, HomeSettings, MootCourt],
 
   editor: lexicalEditor(),
 
@@ -85,6 +77,11 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
+      ssl: { rejectUnauthorized: false },
+      max: 3,
+      min: 0,
+      idleTimeoutMillis: 30_000,
+      connectionTimeoutMillis: 10_000,
     },
   }),
 

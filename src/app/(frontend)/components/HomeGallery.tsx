@@ -78,6 +78,7 @@ export function HomeGallery({ images }: { images: any[] }) {
                 src={image.image.url}
                 alt={image.alt || 'Campus Life'}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
               />
               

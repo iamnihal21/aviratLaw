@@ -14,7 +14,7 @@ const navigation = [
   { name: 'Achievements', href: '/achievements', desc: 'Our milestones' },
   { name: 'Admissions', href: '/admissions', desc: 'Join our community' },
   { name: 'Activities & Visits', href: '/activities-visits', desc: 'Beyond the classroom' },
-  { name: 'Campus', href: '/campus', desc: 'Shaping Tomorrow\'s Legal Minds' },
+  { name: 'Campus', href: '/campus', desc: "Shaping Tomorrow's Legal Minds" },
   { name: 'Contact Us', href: '/contact', desc: 'Get in touch with us' },
   { name: 'Events', href: '/events', desc: 'Happening now' },
   { name: 'Gallery', href: '/gallery', desc: 'Visual journey' },
@@ -43,20 +43,24 @@ export function Header() {
   return (
     <>
       {/* --- GCAS Awareness Banner --- */}
-      
-<div className="fixed top-0 left-0 right-0 z-[60] bg-gray-400 h-10 flex items-center justify-center border-b border-white/10">
-  <div className="flex items-center gap-3 px-6">
-    <motion.div
-      animate={{ scale: [1, 1.2, 1] }}
-      transition={{ duration: 2, repeat: Infinity }}
-      className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary),0.5)]"
-    />
-    <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.25em] text-white/90">
-      We possess <span className='bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent'> GCAS Registration Admission process </span>  and any query 
-    </span>
-    
-  </div>
-</div>
+
+      <div className="fixed top-0 left-0 right-0 z-[60] bg-gray-400 h-10 flex items-center justify-center border-b border-white/10">
+        <div className="flex items-center gap-3 px-6">
+          <motion.div
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary),0.5)]"
+          />
+          <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.25em] text-white/90">
+            We possess{' '}
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              {' '}
+              GCAS Registration Admission process{' '}
+            </span>{' '}
+            and any query
+          </span>
+        </div>
+      </div>
       <header
         className={`fixed left-0 right-0 z-50 transition-all duration-500 ${
           // We add 'top-8' to push the header down below the ticker
@@ -73,9 +77,10 @@ export function Header() {
                 {/* Ensure your logo path matches your setup (Supabase vs Local) */}
                 <Image
                   src="/logo.png"
-                  alt="Avirat Logo"
+                  alt="Avirat Law College"
                   fill
-                  className="object-contain "
+                  sizes="200px"
+                  className="..."
                 />
               </div>
 
@@ -99,7 +104,6 @@ export function Header() {
 
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center gap-8">
-
               <div className="flex items-center gap-3">
                 <Button
                   variant="ghost"
@@ -135,7 +139,6 @@ export function Header() {
               <Menu className="h-6 w-6" />
             </button>
           </div>
-          
         </nav>
       </header>
 

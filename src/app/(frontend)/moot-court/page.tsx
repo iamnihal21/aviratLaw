@@ -1,11 +1,11 @@
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import MootCourtClient from './MootCourtClient'
 
 export const revalidate = 60
 
 export default async function MootCourtPage() {
-  const payload = await getPayloadHMR({ config: configPromise })
+  const payload = await getPayload({ config: configPromise })
 
   const data = await payload.findGlobal({
     slug: 'moot-court',
@@ -14,3 +14,5 @@ export default async function MootCourtPage() {
 
   return <MootCourtClient data={data} />
 }
+
+export const dynamic = 'force-dynamic'
