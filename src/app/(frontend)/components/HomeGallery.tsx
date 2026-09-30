@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, type Variants } from 'framer-motion'
-import { ArrowUpRight, Expand } from 'lucide-react'
+import { ArrowUpRight,} from 'lucide-react'
 import { useScrollAnimation } from '@/app/(frontend)/hooks/use-scroll-animation'
 
 export function HomeGallery({ images }: { images: any[] }) {

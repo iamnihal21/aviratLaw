@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, Variants } from 'framer-motion'
+import Image from 'next/image'
 import {
   Sparkles,
   Eye,
@@ -11,9 +12,7 @@ import {
   BookOpen,
   GraduationCap,
   Globe,
-  Briefcase,
   Award,
-  BookOpenCheck,
   Building2,
 } from 'lucide-react'
 import {
@@ -79,11 +78,6 @@ export default function AboutClient({ data }: { data: any }) {
   const staggerChildren = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-  }
-
-  const cardHover = {
-    initial: { y: 0, scale: 1 },
-    hover: { y: -8, scale: 1.02, transition: { duration: 0.3, ease: 'easeOut' } },
   }
 
   return (
@@ -252,12 +246,16 @@ export default function AboutClient({ data }: { data: any }) {
               >
                 <div className="relative w-56 h-56 rounded-[2.5rem] overflow-hidden shrink-0 shadow-inner bg-gray-100 ring-4 ring-gray-50 group-hover:ring-primary/10 transition-all">
                   {trustee?.image ? (
-                    <img
+                    <Image
                       src={
-                        typeof trustee.image === 'string' ? trustee.image : trustee.image?.url || ''
+                        typeof trustee.image === 'string'
+                          ? trustee.image
+                          : trustee.image?.url || '/placeholder.jpg'
                       }
                       alt={trustee.name || 'Trustee'}
-                      className="w-full h-full object-cover transition-all duration-500 scale-105 group-hover:scale-100"
+                      fill
+                      sizes="224px"
+                      className="object-cover transition-all duration-500 scale-105 group-hover:scale-100"
                     />
                   ) : (
                     <div className="flex items-center justify-center h-full text-gray-400">
@@ -313,7 +311,7 @@ export default function AboutClient({ data }: { data: any }) {
       )}
 
       {/* Faculty and Expertise Section */}
-      <section className="py-24 bg-secondary/30 overflow-hidden">
+      <section className="py-24 bg-secondary overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div ref={facultySectionRef} className="text-center mb-16">
             <motion.div

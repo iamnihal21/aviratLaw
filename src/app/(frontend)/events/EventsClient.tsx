@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/app/(frontend)/components/ui/button'
+import ImageCarousel from '../components/ImageCarousel'
+import Image from 'next/image'
 import {
   Card,
   CardContent,
@@ -139,15 +141,38 @@ export default function EventsClient({ eventsData }: { eventsData: any[] }) {
                     onClick={() => setSelectedEvent(event)}
                     className="cursor-pointer group"
                   >
-                    <Card className="bg-white border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden h-full">
-                      <div className={`h-40 bg-gradient-to-br ${event.color} relative`}>
-                        <div className="absolute top-4 right-4 px-3 py-1 bg-white/90 rounded-full text-xs font-medium">
-                          {event.category}
+                    <Card className="bg-white border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden h-full flex flex-col">
+                      {/* Cover */}
+                      {event.image?.url ? (
+                        <div className="relative aspect-[16/9] overflow-hidden">
+                          <Image
+                            src={event.image.url}
+                            alt={event.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                            className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                          />
+                          <div
+                            className={`absolute inset-0 bg-gradient-to-t ${event.color} opacity-40`}
+                          />
+                          <div className="absolute top-4 right-4 px-3 py-1 bg-white/90 rounded-full text-xs font-bold">
+                            {event.category}
+                          </div>
+                          <div className="absolute bottom-4 left-4">
+                            <Icon className="h-8 w-8 text-white drop-shadow-lg" />
+                          </div>
                         </div>
-                        <div className="absolute bottom-4 left-4">
-                          <Icon className="h-8 w-8 text-white" />
+                      ) : (
+                        <div className={`h-40 bg-gradient-to-br ${event.color} relative`}>
+                          <div className="absolute top-4 right-4 px-3 py-1 bg-white/90 rounded-full text-xs font-medium">
+                            {event.category}
+                          </div>
+                          <div className="absolute bottom-4 left-4">
+                            <Icon className="h-8 w-8 text-white" />
+                          </div>
                         </div>
-                      </div>
+                      )}
+
                       <CardHeader>
                         <CardTitle className="text-xl group-hover:text-primary transition-colors">
                           {event.title}
@@ -156,7 +181,8 @@ export default function EventsClient({ eventsData }: { eventsData: any[] }) {
                           {event.description}
                         </CardDescription>
                       </CardHeader>
-                      <CardContent className="space-y-3">
+
+                      <CardContent className="space-y-3 flex-1 flex flex-col">
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <Calendar className="h-4 w-4 text-primary" /> {event.date}
                         </div>
@@ -166,6 +192,21 @@ export default function EventsClient({ eventsData }: { eventsData: any[] }) {
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <MapPin className="h-4 w-4 text-primary" /> {event.location}
                         </div>
+
+                        {event.images?.length > 0 && (
+                          <div className="mt-auto pt-4 border-t border-gray-100">
+                            <div className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3">
+                              Gallery — {event.images.length}
+                            </div>
+                            <ImageCarousel
+                              images={event.images
+                                .map((row: any) => row.image)
+                                .filter(Boolean)
+                                .map((img: any) => ({ url: img.url, alt: img.alt || event.title }))}
+                              title={event.title}
+                            />
+                          </div>
+                        )}
                       </CardContent>
                     </Card>
                   </motion.div>

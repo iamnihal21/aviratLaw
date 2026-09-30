@@ -12,13 +12,13 @@ export default async function ActivitiesPage() {
       collection: 'activities',
       sort: 'displayOrder',
       limit: 100,
-      depth: 1,
+      depth: 2,
     }),
     payload.find({
       collection: 'visits',
       sort: 'displayOrder',
       limit: 100,
-      depth: 1,
+      depth: 2,
     }),
   ])
 

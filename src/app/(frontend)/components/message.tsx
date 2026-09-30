@@ -90,8 +90,8 @@ export function MessageSection({ sanskritQuote, quoteTranslation }: MessageSecti
           className="flex flex-col items-center"
         >
           <div className="w-12 h-[1px] bg-primary/30 mb-6" />
-          <p className="text-lg md:text-xl text-gray-500 italic max-w-2xl font-light leading-relaxed">
-            {quoteTranslation}
+          <p className="text-lg md:text-xl text-gray-200 italic max-w-2xl font-light leading-relaxed">
+            <b>{quoteTranslation}</b>
           </p>
         </motion.div>
       </div>

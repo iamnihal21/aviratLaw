@@ -166,11 +166,63 @@ export default function MootCourtClient({ data }: { data: any }) {
           </div>
         </section>
       )}
+      {/* ================= GALLERY ================= */}
+      {data?.galleryImages?.length > 0 && (
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 text-primary font-black uppercase tracking-[0.2em] text-xs mb-4">
+                <div className="w-8 h-[2px] bg-primary" />
+                <span>From the Courtroom</span>
+                <div className="w-8 h-[2px] bg-primary" />
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight">
+                Moments of <span className="text-primary italic">Advocacy.</span>
+              </h2>
+            </div>
 
+            <div className="grid md:grid-cols-3 gap-6">
+              {data.galleryImages.map((row: any, i: number) => {
+                const img = row.image
+                if (!img?.url) return null
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.08 }}
+                    viewport={{ once: true }}
+                    className="relative aspect-[4/3] rounded-[2rem] overflow-hidden group"
+                  >
+                    <Image
+                      src={img.url}
+                      alt={row.caption || `Moot Court photo ${i + 1}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                    />
+                    {row.caption && (
+                      <>
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute bottom-4 left-4 translate-y-2 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                          <p className="text-white font-black text-sm uppercase tracking-widest">
+                            {row.caption}
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </motion.div>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+      )}
       {/* ---------------- ABOUT ---------------- */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div ref={aboutRef} className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* LEFT: Text */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={aboutInView ? { opacity: 1, x: 0 } : {}}
@@ -187,45 +239,45 @@ export default function MootCourtClient({ data }: { data: any }) {
                 {data?.aboutDescription ||
                   'Moot court at Avirat Law College is a rigorous simulation of appellate advocacy. Students research, draft memorials, and present oral arguments before panels of judges — honing skills that no classroom alone can teach.'}
               </p>
+            </motion.div>
 
-              {data?.aboutPoints?.length > 0 && (
-                <ul className="space-y-4">
-                  {data.aboutPoints.map((p: any, i: number) => (
+            {/* RIGHT: Points panel */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={aboutInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.15 }}
+              className="relative"
+            >
+              {/* Accent blob */}
+              <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 via-secondary/10 to-transparent rounded-[3rem] blur-2xl" />
+
+              <div className="relative bg-gradient-to-br from-gray-950 to-primary rounded-[3rem] p-10 shadow-2xl">
+                <div className="flex items-center gap-3 mb-8">
+                  <Gavel className="w-6 h-6 text-secondary" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.25em] text-secondary">
+                    What You Gain
+                  </span>
+                </div>
+
+                <ul className="space-y-5">
+                  {data?.aboutPoints?.map((p: any, i: number) => (
                     <motion.li
                       key={i}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 }}
-                      className="flex items-start gap-3 group"
+                      initial={{ opacity: 0, x: 10 }}
+                      animate={aboutInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ delay: 0.3 + i * 0.1 }}
+                      className="flex items-start gap-4 group"
                     >
-                      <div className="w-2 h-2 rounded-full bg-primary mt-2 group-hover:scale-150 transition-transform" />
-                      <span className="font-medium text-gray-700">{p.point}</span>
+                      <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-secondary group-hover:border-secondary transition-all">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-secondary group-hover:text-white transition-colors" />
+                      </div>
+                      <span className="text-white/90 font-medium leading-snug pt-0.5">
+                        {p.point}
+                      </span>
                     </motion.li>
                   ))}
                 </ul>
-              )}
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={aboutInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              {data?.heroImage?.url ? (
-                <div className="relative rounded-[3rem] overflow-hidden shadow-2xl aspect-[4/5]">
-                  <Image
-                    src={data.heroImage.url}
-                    alt={data.heroImage.alt || 'Moot Court'}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ) : (
-                <div className="rounded-[3rem] aspect-[4/5] bg-gradient-to-br from-primary/5 via-secondary/10 to-accent/5 flex items-center justify-center border border-gray-100">
-                  <Gavel className="w-32 h-32 text-primary/20" />
-                </div>
-              )}
+              </div>
             </motion.div>
           </div>
         </div>

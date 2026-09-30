@@ -253,6 +253,10 @@ export interface StudentAchievement {
   date?: string | null;
   prize?: string | null;
   color?: string | null;
+  /**
+   * Photo of the student or the award ceremony
+   */
+  image?: (number | null) | Media;
   iconType?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -298,6 +302,12 @@ export interface Event {
       )
     | null;
   image?: (number | null) | Media;
+  images?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -444,6 +454,15 @@ export interface Activity {
   venue?: string | null;
   description: string;
   image?: (number | null) | Media;
+  /**
+   * Additional photos shown below the card (3–4 recommended)
+   */
+  images?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
   highlights?:
     | {
         point?: string | null;
@@ -473,6 +492,12 @@ export interface Visit {
   date: string;
   description: string;
   image?: (number | null) | Media;
+  images?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
   /**
    * Key takeaways from the visit
    */
@@ -689,6 +714,7 @@ export interface StudentAchievementsSelect<T extends boolean = true> {
   date?: T;
   prize?: T;
   color?: T;
+  image?: T;
   iconType?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -724,6 +750,12 @@ export interface EventsSelect<T extends boolean = true> {
   iconType?: T;
   color?: T;
   image?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -843,6 +875,12 @@ export interface ActivitiesSelect<T extends boolean = true> {
   venue?: T;
   description?: T;
   image?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
   highlights?:
     | T
     | {
@@ -865,6 +903,12 @@ export interface VisitsSelect<T extends boolean = true> {
   date?: T;
   description?: T;
   image?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
   learnings?:
     | T
     | {
@@ -1195,6 +1239,19 @@ export interface MootCourt {
   heroHighlight?: string | null;
   heroDescription?: string | null;
   heroImage?: (number | null) | Media;
+  /**
+   * Photos shown as a grid below the hero section
+   */
+  galleryImages?:
+    | {
+        image: number | Media;
+        /**
+         * Optional caption, e.g. "Semi-final round"
+         */
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   aboutTitle?: string | null;
   aboutDescription?: string | null;
   aboutPoints?:
@@ -1538,6 +1595,13 @@ export interface MootCourtSelect<T extends boolean = true> {
   heroHighlight?: T;
   heroDescription?: T;
   heroImage?: T;
+  galleryImages?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
   aboutTitle?: T;
   aboutDescription?: T;
   aboutPoints?:

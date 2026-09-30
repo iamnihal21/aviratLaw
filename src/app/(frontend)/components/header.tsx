@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, Phone, Mail, ChevronRight, Globe, UserCircle, Sparkles } from 'lucide-react'
+import { Menu, X, ChevronRight, Globe, } from 'lucide-react'
 import { Button } from '@/app/(frontend)/components/ui/button'
 import { motion, AnimatePresence } from 'framer-motion'
 import { usePathname } from 'next/navigation'
@@ -16,10 +16,10 @@ const navigation = [
   { name: 'Activities & Visits', href: '/activities-visits', desc: 'Beyond the classroom' },
   { name: 'Campus', href: '/campus', desc: "Shaping Tomorrow's Legal Minds" },
   { name: 'Contact Us', href: '/contact', desc: 'Get in touch with us' },
-  { name: 'Events', href: '/events', desc: 'Happening now' },
+  // { name: 'Events', href: '/events', desc: 'Happening now' },
   { name: 'Gallery', href: '/gallery', desc: 'Visual journey' },
   { name: 'Moot Court', href: '/moot-court', desc: 'Master the art of advocacy' },
-  { name: 'Research', href: '/research', desc: 'Innovation at core' },
+  // { name: 'Research', href: '/research', desc: 'Innovation at core' },
 ]
 
 export function Header() {

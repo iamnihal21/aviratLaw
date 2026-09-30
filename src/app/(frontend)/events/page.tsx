@@ -11,6 +11,7 @@ export default async function EventsPage() {
     collection: 'events',
     limit: 100,
     sort: '-date',
+    depth: 2,
   })
 
   return <EventsClient eventsData={eventsRes.docs} />
