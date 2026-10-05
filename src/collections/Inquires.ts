@@ -38,15 +38,6 @@ export const Inquiries: CollectionConfig = {
           type: 'text',
           required: true,
         },
-        {
-          name: 'course',
-          type: 'select',
-          required: true,
-          options: [
-            { label: 'BCA (Computer Applications)', value: 'bca' },
-            { label: 'BBA (Business Admin)', value: 'bba' },
-          ],
-        },
       ],
     },
     {

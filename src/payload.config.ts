@@ -162,7 +162,7 @@ const allowedOrigins = [
   'https://avirat-law-college-black.vercel.app',
   process.env.NEXT_SERVER_URL,
   process.env.PAYLOAD_PUBLIC_SERVER_URL,
-  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+  // process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
 ].filter(Boolean) as string[]
 
 export default buildConfig({
@@ -220,10 +220,11 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
       ssl: { rejectUnauthorized: false },
-      max: 3,
+      max: 1, // ✅ one connection per function instance
       min: 0,
-      idleTimeoutMillis: 30_000,
+      idleTimeoutMillis: 10_000, // ✅ release faster
       connectionTimeoutMillis: 10_000,
+      allowExitOnIdle: true, // ✅ critical for serverless — lets the function exit
     },
   }),
 
