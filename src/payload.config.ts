@@ -358,13 +358,14 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
       ssl: { rejectUnauthorized: false },
-      max: isProduction ? 1 : 10,
+      max: isProduction ? 5 : 10,
       min: 0,
-      idleTimeoutMillis: isProduction ? 5_000 : 30_000,
+      idleTimeoutMillis: isProduction ? 10_000 : 30_000,
       connectionTimeoutMillis: 60_000,
       allowExitOnIdle: isProduction,
     },
   }),
+
   sharp,
 
   plugins: [
