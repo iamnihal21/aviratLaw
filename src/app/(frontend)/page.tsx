@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import HomeClient from '../(frontend)/components/HomeClient'
 
+
 // export const revalidate = 60
 export const dynamic = 'force-dynamic'
 
@@ -21,5 +22,6 @@ export default async function Page() {
     depth: 1,
   })
 
-  return <HomeClient homeData={homeData} galleryImages={gallery.docs} />
+  return <HomeClient homeData={homeData} galleryImages={gallery.docs} /> 
+  
 }

@@ -9,6 +9,7 @@ import { MapSection } from './mapSection'
 import { Stats } from './stats'
 import { CourseStructure } from './subjects'
 import { WhyChooseUs } from './WhyChoseUs'
+import { Analytics } from "@vercel/analytics/next"  
 
 export default function HomeClient({
   homeData,
@@ -39,6 +40,8 @@ export default function HomeClient({
         sanskritQuote={homeData?.sanskritQuote}
         quoteTranslation={homeData?.quoteTranslation}
       />
+
+      <Analytics />
     </main>
   )
 }
