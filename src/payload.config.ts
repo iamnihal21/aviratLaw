@@ -180,23 +180,23 @@
 //   //   secure: process.env.NODE_ENV === 'production',
 //   // },
 
-  // collections: [
-  //   Users,
-  //   Media,
-  //   CollegeAchievements,
-  //   StudentAchievements,
-  //   Gallery,
-  //   Events,
-  //   ResearchAreas,
-  //   Faculty,
-  //   Publications,
-  //   Payments,
-  //   Students,
-  //   Results,
-  //   Inquiries,
-  //   Activities,
-  //   Visits,
-  // ],
+// collections: [
+//   Users,
+//   Media,
+//   CollegeAchievements,
+//   StudentAchievements,
+//   Gallery,
+//   Events,
+//   ResearchAreas,
+//   Faculty,
+//   Publications,
+//   Payments,
+//   Students,
+//   Results,
+//   Inquiries,
+//   Activities,
+//   Visits,
+// ],
 
 //   globals: [About, Contact, Admissions, Campus, HomeSettings, MootCourt],
 
@@ -212,11 +212,11 @@
 //   pool: {
 //     connectionString: process.env.DATABASE_URL || '',
 //     ssl: { rejectUnauthorized: false },
-//     max: 1,              
+//     max: 1,
 //     min: 0,
-//     idleTimeoutMillis: 10_000,       
+//     idleTimeoutMillis: 10_000,
 //     connectionTimeoutMillis: 10_000,
-//     allowExitOnIdle: true,           
+//     allowExitOnIdle: true,
 //   },
 // }),
 
@@ -276,7 +276,6 @@ import { Campus } from './globals/Campus'
 import { HomeSettings } from './globals/HomeSettings'
 import { MootCourt } from './globals/MootCourt'
 
-
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -293,10 +292,28 @@ const allowedOrigins = [
 ].filter(Boolean) as string[]
 
 const poolConfig = isBuildPhase
-  ? { max: 5, min: 0, idleTimeoutMillis: 30_000, connectionTimeoutMillis: 30_000, allowExitOnIdle: false }
+  ? {
+      max: 5,
+      min: 0,
+      idleTimeoutMillis: 30_000,
+      connectionTimeoutMillis: 30_000,
+      allowExitOnIdle: false,
+    }
   : isProduction
-  ? { max: 1, min: 0, idleTimeoutMillis: 10_000, connectionTimeoutMillis: 30_000, allowExitOnIdle: true }
-  : { max: 10, min: 0, idleTimeoutMillis: 30_000, connectionTimeoutMillis: 30_000, allowExitOnIdle: false }
+    ? {
+        max: 1,
+        min: 0,
+        idleTimeoutMillis: 10_000,
+        connectionTimeoutMillis: 30_000,
+        allowExitOnIdle: true,
+      }
+    : {
+        max: 10,
+        min: 0,
+        idleTimeoutMillis: 30_000,
+        connectionTimeoutMillis: 30_000,
+        allowExitOnIdle: false,
+      }
 
 export default buildConfig({
   admin: {
@@ -304,7 +321,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
   },
 
-    collections: [
+  collections: [
     Users,
     Media,
     CollegeAchievements,
@@ -341,7 +358,11 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
       ssl: { rejectUnauthorized: false },
-      ...poolConfig,
+      max: isProduction ? 5 : 10,
+      min: 0,
+      idleTimeoutMillis: isProduction ? 10_000 : 30_000,
+      connectionTimeoutMillis: 60_000,
+      allowExitOnIdle: isProduction,
     },
   }),
 
