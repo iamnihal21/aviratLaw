@@ -2,7 +2,8 @@ import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import GalleryClient from './GalleryClient'
 
-export const revalidate = 60
+// export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 export default async function GalleryPage() {
   const payload = await getPayload({ config: configPromise })
@@ -15,4 +16,3 @@ export default async function GalleryPage() {
   return <GalleryClient items={galleryData.docs} />
 }
 
-export const dynamic = 'force-dynamic'

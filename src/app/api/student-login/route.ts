@@ -1,5 +1,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
+export const dynamic = 'force-dynamic'
 
 export async function POST(req: Request) {
   const payload = await getPayload({ config })

@@ -2,7 +2,8 @@ import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import ResearchClient from './ResearchClient'
 
-export const revalidate = 60
+// export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 export default async function ResearchPage() {
   const payload = await getPayload({ config: configPromise })
@@ -16,4 +17,3 @@ export default async function ResearchPage() {
   return <ResearchClient areas={areas.docs} faculty={faculty.docs} publications={pubs.docs} />
 }
 
-export const dynamic = 'force-dynamic'

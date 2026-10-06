@@ -7,6 +7,7 @@ import { cn } from '@/app/(frontend)/lib/utils'
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const
+export const dynamic = 'force-dynamic'
 
 export type ChartConfig = {
   [k in string]: {

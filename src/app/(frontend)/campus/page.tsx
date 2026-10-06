@@ -2,7 +2,8 @@ import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import CampusClient from './CampusClient'
 
-export const revalidate = 60
+// export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 export default async function CampusPage() {
   const payload = await getPayload({ config: configPromise })
@@ -13,4 +14,3 @@ export default async function CampusPage() {
   return <CampusClient settings={settings} gallery={galleryRes.docs} />
 }
 
-export const dynamic = 'force-dynamic'

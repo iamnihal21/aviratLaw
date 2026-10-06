@@ -2,7 +2,8 @@ import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import HomeClient from '../(frontend)/components/HomeClient'
 
-export const revalidate = 60
+// export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 export default async function Page() {
   const payload = await getPayload({ config: configPromise })

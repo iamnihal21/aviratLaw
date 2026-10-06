@@ -180,23 +180,23 @@
 //   //   secure: process.env.NODE_ENV === 'production',
 //   // },
 
-//   collections: [
-//     Users,
-//     Media,
-//     CollegeAchievements,
-//     StudentAchievements,
-//     Gallery,
-//     Events,
-//     ResearchAreas,
-//     Faculty,
-//     Publications,
-//     Payments,
-//     Students,
-//     Results,
-//     Inquiries,
-//     Activities,
-//     Visits,
-//   ],
+  // collections: [
+  //   Users,
+  //   Media,
+  //   CollegeAchievements,
+  //   StudentAchievements,
+  //   Gallery,
+  //   Events,
+  //   ResearchAreas,
+  //   Faculty,
+  //   Publications,
+  //   Payments,
+  //   Students,
+  //   Results,
+  //   Inquiries,
+  //   Activities,
+  //   Visits,
+  // ],
 
 //   globals: [About, Contact, Admissions, Campus, HomeSettings, MootCourt],
 
@@ -276,13 +276,13 @@ import { Campus } from './globals/Campus'
 import { HomeSettings } from './globals/HomeSettings'
 import { MootCourt } from './globals/MootCourt'
 
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-// ✅ Environment detection
 const isProduction = process.env.NODE_ENV === 'production'
+const isBuildPhase = process.env.NEXT_PHASE === 'phase-production-build'
 
-// ✅ Allowed origins for CSRF/CORS — must include localhost + Vercel URL + custom domain
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:3001',
@@ -292,23 +292,19 @@ const allowedOrigins = [
   process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
 ].filter(Boolean) as string[]
 
+const poolConfig = isBuildPhase
+  ? { max: 5, min: 0, idleTimeoutMillis: 30_000, connectionTimeoutMillis: 30_000, allowExitOnIdle: false }
+  : isProduction
+  ? { max: 1, min: 0, idleTimeoutMillis: 10_000, connectionTimeoutMillis: 30_000, allowExitOnIdle: true }
+  : { max: 10, min: 0, idleTimeoutMillis: 30_000, connectionTimeoutMillis: 30_000, allowExitOnIdle: false }
+
 export default buildConfig({
   admin: {
     user: Users.slug,
-    importMap: {
-      baseDir: path.resolve(dirname),
-    },
+    importMap: { baseDir: path.resolve(dirname) },
   },
 
-  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
-
-  // ✅ CRITICAL: fixes Vercel admin 403
-  csrf: allowedOrigins,
-  cors: allowedOrigins,
-
-  cookiePrefix: 'avirat-law',
-
-  collections: [
+    collections: [
     Users,
     Media,
     CollegeAchievements,
@@ -326,30 +322,26 @@ export default buildConfig({
     Visits,
   ],
 
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
+
+  csrf: allowedOrigins,
+  cors: allowedOrigins,
+
+  cookiePrefix: 'avirat-law',
+
   globals: [About, Contact, Admissions, Campus, HomeSettings, MootCourt],
 
   editor: lexicalEditor(),
 
-  // ✅ Fail loudly if missing, no silent dev fallback in prod
   secret: process.env.PAYLOAD_SECRET || 'dev-secret-key',
 
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
+  typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
 
-  // ✅ Environment-aware pool — tight on Vercel, generous on local
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
       ssl: { rejectUnauthorized: false },
-
-      // On Vercel: 1 conn per function + exit on idle (avoids EMAXCONNSESSION)
-      // On local: 10 conns + no exit on idle (drizzle-kit schema pull needs this)
-      max: isProduction ? 1 : 10,
-      min: 0,
-      idleTimeoutMillis: isProduction ? 10_000 : 30_000,
-      connectionTimeoutMillis: 30_000,
-      allowExitOnIdle: isProduction,
+      ...poolConfig,
     },
   }),
 
