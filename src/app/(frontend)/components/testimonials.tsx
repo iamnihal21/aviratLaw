@@ -133,8 +133,8 @@ export function Testimonials({ data }: TestimonialsProps) {
             </AnimatePresence>
 
             {/* Decorative Static Cards for "Stack" effect */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[460px] h-[380px] bg-slate-50 border border-gray-100 rounded-[3rem] translate-x-6 translate-y-6 -z-10" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[420px] h-[340px] bg-slate-100/50 border border-gray-100 rounded-[3rem] translate-x-12 translate-y-12 -z-20" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[460px] h-[380px] bg-slate-50 border border-gray-100 rounded-[3rem] -z-10" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[420px] h-[340px] bg-slate-100/50 border border-gray-100 rounded-[3rem] -z-20" />
           </div>
         </div>
       </div>

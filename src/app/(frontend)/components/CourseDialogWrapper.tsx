@@ -1,3 +1,4 @@
+
 'use client'
 
 import { useState, useEffect, ReactNode } from 'react'
@@ -5,19 +6,17 @@ import { CourseDialog } from './courseSelection'
 import { CourseType } from '@/types/course'
 
 interface Props {
-  // Define props to receive the data from the server
-  statsSection: ReactNode 
+  statsSection: ReactNode
   gallerySection: ReactNode
   testimonialsSection: ReactNode
-  // We'll handle the subject structure internally based on the selected course
   courseStructureComponent: (course: CourseType) => ReactNode
 }
 
-export function CourseDialogWrapper({ 
-  statsSection, 
-  gallerySection, 
+export function CourseDialogWrapper({
+  statsSection,
+  gallerySection,
   testimonialsSection,
-  courseStructureComponent 
+  courseStructureComponent,
 }: Props) {
   const [selectedCourse, setSelectedCourse] = useState<CourseType | null>(null)
   const [mounted, setMounted] = useState(false)
@@ -33,7 +32,7 @@ export function CourseDialogWrapper({
   return (
     <>
       <CourseDialog onSelect={(c) => setSelectedCourse(c)} />
-      
+
       {selectedCourse && (
         <>
           {statsSection}
