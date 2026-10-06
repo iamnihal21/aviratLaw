@@ -425,6 +425,7 @@ export interface Inquiry {
   name: string;
   email: string;
   phone: string;
+  course: 'llb';
   lastQualification: string;
   message?: string | null;
   updatedAt: string;
@@ -855,6 +856,7 @@ export interface InquiriesSelect<T extends boolean = true> {
   name?: T;
   email?: T;
   phone?: T;
+  course?: T;
   lastQualification?: T;
   message?: T;
   updatedAt?: T;

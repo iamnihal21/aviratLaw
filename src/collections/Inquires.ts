@@ -8,9 +8,8 @@ export const Inquiries: CollectionConfig = {
     group: 'Submissions',
   },
   access: {
-    // Only allow the public to create inquiries, but not read them
     create: () => true,
-    read: ({ req: { user } }) => !!user, // Only logged-in admins can see them
+    read: ({ req: { user } }) => !!user,
     update: ({ req: { user } }) => !!user,
     delete: ({ req: { user } }) => !!user,
   },
@@ -18,25 +17,19 @@ export const Inquiries: CollectionConfig = {
     {
       type: 'row',
       fields: [
-        {
-          name: 'name',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'email',
-          type: 'email',
-          required: true,
-        },
+        { name: 'name', type: 'text', required: true },
+        { name: 'email', type: 'email', required: true },
       ],
     },
     {
       type: 'row',
       fields: [
+        { name: 'phone', type: 'text', required: true },
         {
-          name: 'phone',
-          type: 'text',
+          name: 'course',
+          type: 'select',
           required: true,
+          options: [{ label: 'LLB (Law)', value: 'llb' }],
         },
       ],
     },
