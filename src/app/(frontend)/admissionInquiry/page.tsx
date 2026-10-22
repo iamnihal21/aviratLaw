@@ -185,8 +185,7 @@ export default function AdmissionInquiry({ isOpen, onClose }: PortalsMenuProps) 
                             onChange={handleChange}
                             className="w-full px-5 py-4 border-2 border-gray-100 bg-gray-50/50 rounded-2xl outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary focus:bg-white transition-all text-sm font-bold appearance-none cursor-pointer"
                           >
-                            <option value="bca">BCA (Computer Applications)</option>
-                            <option value="bba">BBA (Business Admin)</option>
+                            <option value="llb">LLB</option>
                           </select>
                           <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
                              <ChevronDown className="w-4 h-4" />
